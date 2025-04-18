@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Added to Cart | EduPro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .continue-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 border-b border-gray-700 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <i class="fas fa-graduation-cap text-purple-600 text-2xl"></i>
+                    <span class="ml-2 text-xl font-bold">EduPro</span>
+                </a>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="#" class="text-gray-300 hover:text-white">Courses</a>
+                    <div class="relative">
+                        <a href="cart.html" class="text-gray-300 hover:text-white flex items-center">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="ml-1">Cart</span>
+                            <span class="absolute -top-2 -right-4 bg-purple-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">1</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-gray-800 rounded-xl p-8 border border-gray-700">
+            <!-- Success Message -->
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-500 text-2xl"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">Item Added to Your Cart</h1>
+                <p class="text-gray-300 max-w-md mx-auto">The Complete AI Guide has been successfully added to your shopping cart.</p>
+            </div>
+            
+            <!-- Cart Preview -->
+            <div class="bg-gray-700/50 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-shopping-cart text-purple-500 mr-2"></i>
+                    Your Cart (1 Item)
+                </h2>
+                
+                <div class="cart-item bg-gray-800 rounded-lg p-4 border border-gray-600 transition mb-4">
+                    <div class="flex flex-col md:flex-row items-start md:items-center">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                             alt="The Complete AI Guide" 
+                             class="w-20 h-20 rounded-lg object-cover mb-4 md:mb-0 md:mr-4">
+                        <div class="flex-1">
+                            <h3 class="font-bold">The Complete AI Guide</h3>
+                            <p class="text-gray-400 text-sm mb-2">Master Artificial Intelligence from fundamentals to advanced applications</p>
+                            <div class="flex items-center text-sm text-gray-400 mb-2">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="mr-3">4.8 (1,240 ratings)</span>
+                                <i class="fas fa-user-graduate mr-1"></i>
+                                <span>8,500+ students</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <button class="text-gray-400 hover:text-white px-2">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <span class="text-gray-300 ml-2">Remove</span>
+                                </div>
+                                <span class="font-bold">$57.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-600 pt-4">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-400">Subtotal</span>
+                        <span>$57.00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-400">Discount</span>
+                        <span class="text-green-500">-$40.00</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t border-gray-600">
+                        <span>Total</span>
+                        <span>$57.00</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommended Courses -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                    You Might Also Like
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600 hover:border-purple-500 transition">
+                        <div class="flex items-start">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 class="w-16 h-16 rounded-lg object-cover mr-4">
+                            <div>
+                                <h3 class="font-bold">Machine Learning Fundamentals</h3>
+                                <div class="flex items-center text-sm text-gray-400 mb-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>4.7 • 6,200 students</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-purple-500 font-bold">$49.00</span>
+                                    <button class="text-xs bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-600 hover:border-purple-500 transition">
+                        <div class="flex items-start">
+                            <img src="https://images.unsplash.com/photo-1629909613654-28e377c0b8e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 class="w-16 h-16 rounded-lg object-cover mr-4">
+                            <div>
+                                <h3 class="font-bold">Deep Learning with Python</h3>
+                                <div class="flex items-center text-sm text-gray-400 mb-1">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    <span>4.9 • 4,800 students</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-purple-500 font-bold">$64.00</span>
+                                    <button class="text-xs bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="index.html" class="continue-btn bg-gray-700 hover:bg-gray-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center">
+                    <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                </a>
+                <a href="checkout.html" class="continue-btn bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center">
+                    Proceed to Checkout <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 border-t border-gray-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i class="fas fa-graduation-cap text-purple-600 text-2xl mr-2"></i>
+                    <span class="text-xl font-bold">EduPro</span>
+                </div>
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition">About Us</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Courses</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">Contact</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">FAQ</a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 text-sm mt-6">
+                &copy; 2024 EduPro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // This would include cart management functionality in a real implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Example: Update cart count from localStorage
+            const cartCount = localStorage.getItem('cartCount') || 1;
+            document.querySelector('.fa-shopping-cart + span').textContent = cartCount;
+            
+            // Add event listeners for recommended course "Add to Cart" buttons
+            document.querySelectorAll('[data-add-to-cart]').forEach(button => {
+                button.addEventListener('click', function() {
+                    // In a real app, this would add the item to cart
+                    alert('Added to cart!');
+                    const currentCount = parseInt(localStorage.getItem('cartCount') || 1);
+                    localStorage.setItem('cartCount', currentCount + 1);
+                    document.querySelector('.fa-shopping-cart + span').textContent = currentCount + 1;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

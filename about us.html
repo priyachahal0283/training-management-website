@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Center Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1d4ed8',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                        dark: '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-dark mb-2">Training Center Profile</h1>
+            <p class="text-gray-600 uppercase tracking-wider text-sm">Excellence in Professional Development</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Column - Profile Card -->
+            <div class="w-full lg:w-1/3">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
+                    <!-- Profile Image -->
+                    <div class="relative">
+                        <img id="profile-image" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                             alt="Training Center" class="w-full h-64 object-cover">
+                        <button id="change-image-btn" class="absolute bottom-4 right-4 bg-primary text-white p-3 rounded-full hover:bg-secondary transition shadow-md">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Profile Info -->
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h2 id="profile-name" class="text-2xl font-bold text-gray-800">Professional Training Center</h2>
+                                <p id="profile-title" class="text-primary font-medium mb-4">Accredited Education Provider</p>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Verified</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-start text-gray-600">
+                                <i class="fas fa-envelope mt-1 mr-2 text-primary"></i>
+                                <span id="profile-email">info@trainingcenter.com</span>
+                            </div>
+                            <div class="flex items-start text-gray-600">
+                                <i class="fas fa-phone mt-1 mr-2 text-primary"></i>
+                                <span id="profile-phone">+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-start text-gray-600">
+                                <i class="fas fa-map-marker-alt mt-1 mr-2 text-primary"></i>
+                                <span id="profile-location">123 Education Blvd, Boston, MA 02108</span>
+                            </div>
+                            <div class="flex items-start text-gray-600">
+                                <i class="fas fa-globe mt-1 mr-2 text-primary"></i>
+                                <span id="profile-website">www.trainingcenter.com</span>
+                            </div>
+                        </div>
+                        
+                        <p id="profile-bio" class="text-gray-700 my-6 text-sm leading-relaxed">
+                            Established in 2010, our training center has certified over 10,000 professionals across various industries. 
+                            We offer accredited courses in business, technology, healthcare, and professional development with a 98% satisfaction rate.
+                        </p>
+                        
+                        <!-- Stats -->
+                        <div class="grid grid-cols-3 gap-2 text-center border-t border-gray-100 pt-4">
+                            <div>
+                                <p class="text-2xl font-bold text-primary">50+</p>
+                                <p class="text-xs text-gray-500">Courses</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-primary">100+</p>
+                                <p class="text-xs text-gray-500">Instructors</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-primary">10K+</p>
+                                <p class="text-xs text-gray-500">Graduates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Controls -->
+                <div class="mt-4 space-y-2">
+                    <button id="edit-profile-btn" class="w-full bg-primary text-white py-2.5 px-4 rounded-lg hover:bg-secondary transition font-medium flex items-center justify-center">
+                        <i class="fas fa-edit mr-2"></i> Edit Profile
+                    </button>
+                    <button class="w-full bg-white border border-primary text-primary py-2.5 px-4 rounded-lg hover:bg-blue-50 transition font-medium flex items-center justify-center">
+                        <i class="fas fa-chart-line mr-2"></i> View Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Column - Content -->
+            <div class="w-full lg:w-2/3 space-y-6">
+                <!-- About Section -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">About Our Center</h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                        Our state-of-the-art training facility spans 20,000 square feet with 15 fully equipped classrooms, 
+                        3 computer labs, and a conference center. We are accredited by the International Association for 
+                        Continuing Education and Training (IACET) and partner with leading certification bodies.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-0.5 rounded">IACET Accredited</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-0.5 rounded">ISO 9001 Certified</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-0.5 rounded">PMI REP</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-0.5 rounded">HRCI Approved</span>
+                    </div>
+                </div>
+                
+                <!-- Programs Section -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">Featured Programs</h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-plus"></i> Add Program
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Project Management Professional (PMP)®</h3>
+                                    <p class="text-primary text-sm">40-hour certification prep</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">Next session: June 15-19, 2023</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Data Science Bootcamp</h3>
+                                    <p class="text-primary text-sm">12-week intensive program</p>
+                                </div>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">Next session: July 5 - September 20, 2023</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Leadership Development Program</h3>
+                                    <p class="text-primary text-sm">6-month executive training</p>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">Upcoming</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mt-1">Next session: August 1, 2023</p>
+                        </div>
+                    </div>
+                    <button class="mt-4 text-primary text-sm font-medium hover:text-secondary flex items-center">
+                        View all programs <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </button>
+                </div>
+                
+                <!-- Team Section -->
+                <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">Management Team</h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-user-plus"></i> Add Member
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg">
+                            <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Director">
+                            <div>
+                                <h3 class="font-medium text-gray-800">Dr. Sarah Johnson</h3>
+                                <p class="text-primary text-sm">Executive Director</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg">
+                            <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Academic Dean">
+                            <div>
+                                <h3 class="font-medium text-gray-800">Michael Chen</h3>
+                                <p class="text-primary text-sm">Academic Dean</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg">
+                            <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Operations">
+                            <div>
+                                <h3 class="font-medium text-gray-800">Lisa Rodriguez</h3>
+                                <p class="text-primary text-sm">Director of Operations</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg">
+                            <img class="w-12 h-12 rounded-full object-cover" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Finance">
+                            <div>
+                                <h3 class="font-medium text-gray-800">David Wilson</h3>
+                                <p class="text-primary text-sm">Finance Director</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Modal -->
+        <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-xl p-6 w-full max-w-2xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Edit Training Center Profile</h2>
+                    <button id="cancel-edit-btn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="profile-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Institution Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Tagline</label>
+                            <input type="text" id="title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                        <input type="text" id="location" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="website" class="block text-sm font-medium text-gray-700 mb-1">Website URL</label>
+                        <input type="url" id="website" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="bio" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
+                        <button type="button" id="cancel-edit-btn2" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary font-medium">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editModal = document.getElementById('edit-modal');
+            const cancelEditBtns = document.querySelectorAll('[id^="cancel-edit-btn"]');
+            const profileForm = document.getElementById('profile-form');
+            const changeImageBtn = document.getElementById('change-image-btn');
+            const profileImage = document.getElementById('profile-image');
+            
+            // Profile fields
+            const profileName = document.getElementById('profile-name');
+            const profileTitle = document.getElementById('profile-title');
+            const profileEmail = document.getElementById('profile-email');
+            const profilePhone = document.getElementById('profile-phone');
+            const profileLocation = document.getElementById('profile-location');
+            const profileWebsite = document.getElementById('profile-website');
+            const profileBio = document.getElementById('profile-bio');
+            
+            // Form fields
+            const nameInput = document.getElementById('name');
+            const titleInput = document.getElementById('title');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const locationInput = document.getElementById('location');
+            const websiteInput = document.getElementById('website');
+            const bioInput = document.getElementById('bio');
+            
+            // Open edit modal
+            editProfileBtn.addEventListener('click', function() {
+                // Populate form with current profile data
+                nameInput.value = profileName.textContent;
+                titleInput.value = profileTitle.textContent;
+                emailInput.value = profileEmail.textContent;
+                phoneInput.value = profilePhone.textContent;
+                locationInput.value = profileLocation.textContent;
+                websiteInput.value = profileWebsite.textContent;
+                bioInput.value = profileBio.textContent;
+                
+                editModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+            
+            // Close edit modal
+            cancelEditBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editModal.classList.add('hidden');
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                });
+            });
+            
+            // Save profile changes
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Update profile with form data
+                profileName.textContent = nameInput.value;
+                profileTitle.textContent = titleInput.value;
+                profileEmail.textContent = emailInput.value;
+                profilePhone.textContent = phoneInput.value;
+                profileLocation.textContent = locationInput.value;
+                profileWebsite.textContent = websiteInput.value;
+                profileBio.textContent = bioInput.value;
+                
+                // Close modal
+                editModal.classList.add('hidden');
+                document.body.style.overflow = ''; // Re-enable scrolling
+                
+                // Show success toast notification
+                showToast('Profile updated successfully!', 'success');
+            });
+            
+            // Change profile image
+            changeImageBtn.addEventListener('click', function() {
+                const newImageUrl = prompt('Enter new image URL:', profileImage.src);
+                if (newImageUrl) {
+                    profileImage.src = newImageUrl;
+                    showToast('Image updated successfully!', 'success');
+                }
+            });
+            
+            // Close modal when clicking outside
+            editModal.addEventListener('click', function(e) {
+                if (e.target === editModal) {
+                    editModal.classList.add('hidden');
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                }
+            });
+            
+            // Toast notification function
+            function showToast(message, type) {
+                const toast = document.createElement('div');
+                toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg text-white font-medium ${
+                    type === 'success' ? 'bg-green-500' : 'bg-red-500'
+                }`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

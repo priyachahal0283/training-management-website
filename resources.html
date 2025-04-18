@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Resources | ProTrain Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-graduation-cap text-2xl"></i>
+                <span class="text-xl font-bold">ProTrain Center</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-blue-200">Dashboard</a>
+                <a href="#" class="hover:text-blue-200">Courses</a>
+                <a href="#" class="text-blue-200 font-semibold">Resources</a>
+                <a href="#" class="hover:text-blue-200">Students</a>
+                <a href="#" class="hover:text-blue-200">Reports</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-bell text-xl cursor-pointer"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </div>
+                <div class="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center cursor-pointer">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Training Resources</h1>
+            <button id="uploadBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition duration-200">
+                <i class="fas fa-upload"></i>
+                <span>Upload Resource</span>
+            </button>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+                <div class="flex justify-between items-center border-b px-6 py-4">
+                    <h3 class="text-lg font-semibold">Upload New Resource</h3>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <form id="uploadForm" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Resource Title</label>
+                            <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Resource Type</label>
+                            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Select type</option>
+                                <option value="pdf">PDF Document</option>
+                                <option value="notes">Study Notes</option>
+                                <option value="video">Video</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Course</label>
+                            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Select course</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="digital-marketing">Digital Marketing</option>
+                                <option value="graphic-design">Graphic Design</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">File</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-blue-500 mb-2"></i>
+                                <p class="text-gray-600 mb-2">Drag & drop your file here</p>
+                                <p class="text-sm text-gray-500 mb-4">or</p>
+                                <label class="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition duration-200">
+                                    Browse Files
+                                    <input type="file" class="hidden" required>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 pt-4">
+                            <button type="button" id="cancelUpload" class="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100 transition duration-200">Cancel</button>
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Tabs -->
+        <div class="mb-6">
+            <div class="flex border-b">
+                <button class="tab-btn active px-4 py-2 text-blue-600 border-b-2 border-blue-600 font-medium" data-tab="all">All Resources</button>
+                <button class="tab-btn px-4 py-2 text-gray-600 hover:text-blue-600 font-medium" data-tab="pdf">PDF Documents</button>
+                <button class="tab-btn px-4 py-2 text-gray-600 hover:text-blue-600 font-medium" data-tab="notes">Study Notes</button>
+                <button class="tab-btn px-4 py-2 text-gray-600 hover:text-blue-600 font-medium" data-tab="videos">Videos</button>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
+            <div class="relative flex-grow max-w-md">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                <input type="text" placeholder="Search resources..." class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="flex space-x-3">
+                <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>All Courses</option>
+                    <option>Web Development</option>
+                    <option>Data Science</option>
+                    <option>Digital Marketing</option>
+                    <option>Graphic Design</option>
+                </select>
+                <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Sort by: Newest</option>
+                    <option>Sort by: Oldest</option>
+                    <option>Sort by: Name (A-Z)</option>
+                    <option>Sort by: Name (Z-A)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Resource Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- PDF Resource -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="pdf">
+                <div class="bg-red-50 p-4 flex items-center">
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-file-pdf text-red-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Web Development Basics</h3>
+                        <p class="text-sm text-gray-600">PDF Document • 2.4 MB</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Development</span>
+                        <span class="text-xs text-gray-500">Uploaded: 2 days ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Introduction to HTML, CSS and JavaScript for beginners. Covers all fundamental concepts.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-download mr-1"></i>
+                            <span>124 downloads</span>
+                        </div>
+                        <button class="download-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-file="web-dev-basics.pdf">
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes Resource -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="notes">
+                <div class="bg-green-50 p-4 flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Data Science Notes</h3>
+                        <p class="text-sm text-gray-600">Study Notes • 1.1 MB</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Data Science</span>
+                        <span class="text-xs text-gray-500">Uploaded: 1 week ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Comprehensive notes covering Python for data analysis, pandas, numpy and visualization.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-eye mr-1"></i>
+                            <span>89 views</span>
+                        </div>
+                        <button class="view-btn bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-content="data-science-notes.html">
+                            View Notes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Resource -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="videos">
+                <div class="bg-blue-50 p-4 flex items-center">
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <i class="fas fa-video text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Marketing Strategies</h3>
+                        <p class="text-sm text-gray-600">Video • 45 min</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Digital Marketing</span>
+                        <span class="text-xs text-gray-500">Uploaded: 3 days ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Video lecture covering modern digital marketing strategies and social media campaigns.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-play-circle mr-1"></i>
+                            <span>56 views</span>
+                        </div>
+                        <button class="watch-btn bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-video="marketing-strategies.mp4">
+                            Watch Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="pdf">
+                <div class="bg-red-50 p-4 flex items-center">
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-file-pdf text-red-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Advanced CSS Techniques</h3>
+                        <p class="text-sm text-gray-600">PDF Document • 3.2 MB</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Web Development</span>
+                        <span class="text-xs text-gray-500">Uploaded: 1 month ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Advanced CSS including Flexbox, Grid, animations and responsive design patterns.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-download mr-1"></i>
+                            <span>210 downloads</span>
+                        </div>
+                        <button class="download-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-file="advanced-css.pdf">
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="notes">
+                <div class="bg-green-50 p-4 flex items-center">
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Design Principles</h3>
+                        <p class="text-sm text-gray-600">Study Notes • 0.8 MB</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded">Graphic Design</span>
+                        <span class="text-xs text-gray-500">Uploaded: 2 weeks ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Key principles of design including color theory, typography and composition.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-eye mr-1"></i>
+                            <span>67 views</span>
+                        </div>
+                        <button class="view-btn bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-content="design-principles.html">
+                            View Notes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition duration-200" data-type="pdf">
+                <div class="bg-red-50 p-4 flex items-center">
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fas fa-file-pdf text-red-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-gray-800">Python for Beginners</h3>
+                        <p class="text-sm text-gray-600">PDF Document • 4.1 MB</p>
+                    </div>
+                </div>
+                <div class="p-4 border-t">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Data Science</span>
+                        <span class="text-xs text-gray-500">Uploaded: 3 weeks ago</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">Introduction to Python programming language with exercises and examples.</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-download mr-1"></i>
+                            <span>178 downloads</span>
+                        </div>
+                        <button class="download-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition duration-200" data-file="python-beginners.pdf">
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-10">
+            <nav class="flex items-center space-x-2">
+                <button class="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="px-3 py-1 rounded border bg-blue-600 text-white">1</button>
+                <button class="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100">2</button>
+                <button class="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100">3</button>
+                <span class="px-2 text-gray-600">...</span>
+                <button class="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100">8</button>
+                <button class="px-3 py-1 rounded border text-gray-600 hover:bg-gray-100">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Notes Viewer Modal -->
+    <div id="notesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-5/6 flex flex-col">
+            <div class="flex justify-between items-center border-b px-6 py-4">
+                <h3 class="text-lg font-semibold" id="notesTitle">Study Notes</h3>
+                <button id="closeNotesModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex-grow overflow-auto p-6">
+                <div id="notesContent" class="prose max-w-none">
+                    <!-- Notes content will be loaded here -->
+                    <h2>Data Science Study Notes</h2>
+                    <p class="text-gray-700">These notes cover the fundamental concepts of data science and analysis using Python.</p>
+                    
+                    <h3>Python Basics</h3>
+                    <p>Python is a versatile programming language widely used in data science due to its simplicity and powerful libraries.</p>
+                    
+                    <h4>Data Types</h4>
+                    <ul>
+                        <li>Integers: Whole numbers (e.g., 5, -3, 42)</li>
+                        <li>Floats: Decimal numbers (e.g., 3.14, -0.001)</li>
+                        <li>Strings: Text data (e.g., "hello", 'data science')</li>
+                        <li>Booleans: True or False values</li>
+                    </ul>
+                    
+                    <h3>Pandas Library</h3>
+                    <p>Pandas is a fast, powerful, flexible and easy to use open source data analysis and manipulation tool.</p>
+                    
+                    <h4>Key Data Structures</h4>
+                    <ol>
+                        <li>Series: One-dimensional labeled array</li>
+                        <li>DataFrame: Two-dimensional labeled data structure</li>
+                    </ol>
+                    
+                    <h3>Data Visualization</h3>
+                    <p>Matplotlib and Seaborn are popular libraries for creating static, animated, and interactive visualizations.</p>
+                    
+                    <h4>Common Plot Types</h4>
+                    <ul>
+                        <li>Line plots</li>
+                        <li>Bar charts</li>
+                        <li>Histograms</li>
+                        <li>Scatter plots</li>
+                        <li>Box plots</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t px-6 py-3 flex justify-between items-center">
+                <div class="text-sm text-gray-600">
+                    <span id="notesPageInfo">Page 1 of 12</span>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border rounded text-gray-700 hover:bg-gray-100">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <button class="px-3 py-1 border rounded text-gray-700 hover:bg-gray-100">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        <i class="fas fa-download mr-1"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const resourceCards = document.querySelectorAll('[data-type]');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active tab
+                tabButtons.forEach(btn => btn.classList.remove('active', 'text-blue-600', 'border-blue-600'));
+                button.classList.add('active', 'text-blue-600', 'border-blue-600');
+                
+                // Filter resources
+                const filter = button.dataset.tab;
+                resourceCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.type === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Upload modal functionality
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadModal = document.getElementById('uploadModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelUpload = document.getElementById('cancelUpload');
+        const uploadForm = document.getElementById('uploadForm');
+
+        uploadBtn.addEventListener('click', () => {
+            uploadModal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', () => {
+            uploadModal.classList.add('hidden');
+        });
+
+        cancelUpload.addEventListener('click', () => {
+            uploadModal.classList.add('hidden');
+        });
+
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would handle the file upload with AJAX or similar
+            alert('File uploaded successfully!');
+            uploadModal.classList.add('hidden');
+            uploadForm.reset();
+        });
+
+        // Download button functionality
+        const downloadButtons = document.querySelectorAll('.download-btn');
+        downloadButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filename = button.dataset.file;
+                // In a real app, this would trigger a download
+                alert(`Downloading ${filename}...`);
+                // Track download in your backend
+            });
+        });
+
+        // Notes viewer functionality
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const notesModal = document.getElementById('notesModal');
+        const closeNotesModal = document.getElementById('closeNotesModal');
+
+        viewButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const contentId = button.dataset.content;
+                // In a real app, you would load the notes content here
+                notesModal.classList.remove('hidden');
+            });
+        });
+
+        closeNotesModal.addEventListener('click', () => {
+            notesModal.classList.add('hidden');
+        });
+
+        // Video button functionality
+        const watchButtons = document.querySelectorAll('.watch-btn');
+        watchButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const videoId = button.dataset.video;
+                alert(`Playing video: ${videoId}`);
+                // In a real app, this would open a video player
+            });
+        });
+    </script>
+</body>
+</html>

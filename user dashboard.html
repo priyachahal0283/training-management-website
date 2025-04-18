@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | Training Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1d4ed8',
+                        accent: '#3b82f6',
+                        dark: '#1e3a8a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-dark">User Profile</h1>
+                <nav class="flex text-sm text-gray-500 mt-1">
+                    <a href="#" class="hover:text-primary">Dashboard</a>
+                    <span class="mx-2">/</span>
+                    <a href="#" class="text-primary">Profile</a>
+                </nav>
+            </div>
+            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition flex items-center">
+                <i class="fas fa-download mr-2"></i> Export Profile
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Left Column - Profile Card -->
+            <div class="w-full lg:w-1/3">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <!-- Profile Image -->
+                    <div class="relative bg-gradient-to-r from-primary to-secondary h-32 flex items-center justify-center">
+                        <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                            <div class="relative">
+                                <img id="profile-image" src="https://randomuser.me/api/portraits/men/32.jpg" 
+                                     alt="Profile Image" class="w-24 h-24 rounded-full border-4 border-white object-cover shadow-md">
+                                <button id="change-image-btn" class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full hover:bg-secondary transition shadow-sm">
+                                    <i class="fas fa-camera text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Info -->
+                    <div class="pt-16 pb-6 px-6 text-center">
+                        <h2 id="profile-name" class="text-xl font-bold text-gray-800">Michael Chen</h2>
+                        <p id="profile-title" class="text-primary text-sm font-medium mb-4">Senior Instructor</p>
+                        
+                        <div class="flex justify-center space-x-4 mb-6">
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-dark">24</p>
+                                <p class="text-xs text-gray-500">Courses</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-dark">1.2K</p>
+                                <p class="text-xs text-gray-500">Students</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-dark">4.9</p>
+                                <p class="text-xs text-gray-500">Rating</p>
+                            </div>
+                        </div>
+                        
+                        <button id="edit-profile-btn" class="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-secondary transition font-medium">
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Contact Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 mt-4 p-6">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-address-card mr-2 text-primary"></i> Contact Information
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-primary w-4"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Email</p>
+                                <p id="profile-email" class="text-gray-700">michael.chen@trainingcenter.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-3 text-primary w-4"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Phone</p>
+                                <p id="profile-phone" class="text-gray-700">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary w-4"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Address</p>
+                                <p id="profile-address" class="text-gray-700">123 Education St, Boston, MA 02108</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-calendar-alt mt-1 mr-3 text-primary w-4"></i>
+                            <div>
+                                <p class="text-xs text-gray-500">Joined Date</p>
+                                <p id="profile-joined" class="text-gray-700">January 15, 2018</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Skills Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 mt-4 p-6">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-star mr-2 text-primary"></i> Skills & Expertise
+                    </h3>
+                    <div class="flex flex-wrap gap-2" id="skills-container">
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full">Project Management</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full">Data Analysis</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full">Leadership</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full">Python</span>
+                        <span class="bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full">SQL</span>
+                    </div>
+                    <button id="add-skill-btn" class="mt-3 text-primary text-sm font-medium hover:text-secondary flex items-center">
+                        <i class="fas fa-plus mr-1"></i> Add Skill
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Column - Content -->
+            <div class="w-full lg:w-2/3 space-y-6">
+                <!-- About Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-user mr-2 text-primary"></i> About
+                        </h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <p id="profile-bio" class="text-gray-700 text-sm leading-relaxed">
+                        Certified PMP instructor with over 10 years of experience in project management and corporate training. 
+                        Specializes in agile methodologies and has trained professionals from Fortune 500 companies. 
+                        Passionate about helping professionals develop skills that advance their careers.
+                    </p>
+                </div>
+                
+                <!-- Courses Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-book-open mr-2 text-primary"></i> Teaching Courses
+                        </h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-plus"></i> Assign Course
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="bg-primary bg-opacity-10 text-primary p-2 rounded-lg mr-4">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-gray-800">Project Management Professional (PMP)® Prep</h3>
+                                <p class="text-primary text-xs">Next session: June 15-19, 2023</p>
+                                <div class="flex items-center mt-2 text-xs text-gray-500">
+                                    <span class="flex items-center mr-3">
+                                        <i class="fas fa-users mr-1"></i> 32 students
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400 mr-1"></i> 4.9 (87 reviews)
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="bg-primary bg-opacity-10 text-primary p-2 rounded-lg mr-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-gray-800">Data Analytics Fundamentals</h3>
+                                <p class="text-primary text-xs">Ongoing - Ends July 30, 2023</p>
+                                <div class="flex items-center mt-2 text-xs text-gray-500">
+                                    <span class="flex items-center mr-3">
+                                        <i class="fas fa-users mr-1"></i> 45 students
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400 mr-1"></i> 4.8 (62 reviews)
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="bg-primary bg-opacity-10 text-primary p-2 rounded-lg mr-4">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-gray-800">Leadership in Tech Teams</h3>
+                                <p class="text-primary text-xs">Starting August 5, 2023</p>
+                                <div class="flex items-center mt-2 text-xs text-gray-500">
+                                    <span class="flex items-center mr-3">
+                                        <i class="fas fa-users mr-1"></i> 18 enrolled
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400 mr-1"></i> New course
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-primary">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="mt-4 text-primary text-sm font-medium hover:text-secondary flex items-center justify-center">
+                        View all courses <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </button>
+                </div>
+                
+                <!-- Documents Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-gray-800 flex items-center">
+                            <i class="fas fa-file-alt mr-2 text-primary"></i> Documents & Certifications
+                        </h2>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fas fa-plus"></i> Upload
+                        </button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-pdf text-red-500 text-xl mr-3"></i>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">PMP Certification.pdf</p>
+                                    <p class="text-xs text-gray-500">Uploaded: March 15, 2022</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-400 hover:text-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-red-500">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-word text-blue-500 text-xl mr-3"></i>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Teaching Portfolio.docx</p>
+                                    <p class="text-xs text-gray-500">Uploaded: January 5, 2023</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-400 hover:text-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-red-500">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-file-image text-green-500 text-xl mr-3"></i>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Degree Certificate.jpg</p>
+                                    <p class="text-xs text-gray-500">Uploaded: September 12, 2021</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-400 hover:text-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-red-500">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Edit Profile Modal -->
+        <div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-4 sticky top-0 bg-white py-2">
+                    <h2 class="text-xl font-bold text-gray-800">Edit Profile Information</h2>
+                    <button id="cancel-edit-btn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="profile-form" class="space-y-4">
+                    <div class="text-center mb-6">
+                        <div class="relative inline-block">
+                            <img id="profile-image-preview" src="https://randomuser.me/api/portraits/men/32.jpg" 
+                                 alt="Profile Preview" class="w-24 h-24 rounded-full border-4 border-white object-cover shadow-md mx-auto">
+                            <button type="button" id="change-image-modal-btn" class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full hover:bg-secondary transition shadow-sm">
+                                <i class="fas fa-camera text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="edit-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
+                            <input type="text" id="edit-name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="edit-title" class="block text-sm font-medium text-gray-700 mb-1">Position/Title*</label>
+                            <input type="text" id="edit-title" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="edit-email" class="block text-sm font-medium text-gray-700 mb-1">Email*</label>
+                            <input type="email" id="edit-email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="edit-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone*</label>
+                            <input type="tel" id="edit-phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="edit-address" class="block text-sm font-medium text-gray-700 mb-1">Address*</label>
+                        <input type="text" id="edit-address" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    
+                    <div>
+                        <label for="edit-bio" class="block text-sm font-medium text-gray-700 mb-1">Bio/About*</label>
+                        <textarea id="edit-bio" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Skills</label>
+                        <div class="flex flex-wrap gap-2 mb-2" id="edit-skills-container">
+                            <!-- Skills will be added here by JavaScript -->
+                        </div>
+                        <div class="flex">
+                            <input type="text" id="new-skill-input" placeholder="Add new skill" class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <button type="button" id="add-skill-modal-btn" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-secondary transition">
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200 sticky bottom-0 bg-white py-4">
+                        <button type="button" id="cancel-edit-btn2" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary font-medium">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editModal = document.getElementById('edit-modal');
+            const cancelEditBtns = document.querySelectorAll('[id^="cancel-edit-btn"]');
+            const profileForm = document.getElementById('profile-form');
+            const changeImageBtn = document.getElementById('change-image-btn');
+            const changeImageModalBtn = document.getElementById('change-image-modal-btn');
+            const profileImage = document.getElementById('profile-image');
+            const profileImagePreview = document.getElementById('profile-image-preview');
+            const addSkillBtn = document.getElementById('add-skill-btn');
+            const addSkillModalBtn = document.getElementById('add-skill-modal-btn');
+            const newSkillInput = document.getElementById('new-skill-input');
+            const skillsContainer = document.getElementById('skills-container');
+            const editSkillsContainer = document.getElementById('edit-skills-container');
+            
+            // Profile fields
+            const profileName = document.getElementById('profile-name');
+            const profileTitle = document.getElementById('profile-title');
+            const profileEmail = document.getElementById('profile-email');
+            const profilePhone = document.getElementById('profile-phone');
+            const profileAddress = document.getElementById('profile-address');
+            const profileBio = document.getElementById('profile-bio');
+            
+            // Form fields
+            const editNameInput = document.getElementById('edit-name');
+            const editTitleInput = document.getElementById('edit-title');
+            const editEmailInput = document.getElementById('edit-email');
+            const editPhoneInput = document.getElementById('edit-phone');
+            const editAddressInput = document.getElementById('edit-address');
+            const editBioInput = document.getElementById('edit-bio');
+            
+            // Initialize skills in edit modal
+            function initializeEditSkills() {
+                editSkillsContainer.innerHTML = '';
+                const skills = skillsContainer.querySelectorAll('span');
+                skills.forEach(skill => {
+                    const skillText = skill.textContent;
+                    const skillElement = document.createElement('div');
+                    skillElement.className = 'flex items-center bg-blue-100 text-primary text-xs font-medium px-3 py-1 rounded-full';
+                    skillElement.innerHTML = `
+                        ${skillText}
+                        <button type="button" class="ml-2 text-gray-400 hover:text-red-500 remove-skill">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    `;
+                    editSkillsContainer.appendChild(skillElement);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-skill').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        this.parentElement.remove();
+                    });
+                });
+            }
+            
+            // Open edit modal
+            editProfileBtn.addEventListener('click', function() {
+                // Populate form with current profile data
+                editNameInput.value = profileName.textContent;
+                editTitleInput.value = profileTitle.textContent;
+                editEmailInput.value = profileEmail.textContent;
+                editPhoneInput.value = profilePhone.textContent;
+                editAddressInput.value = profileAddress.textContent;
+                editBioInput.value = profileBio.textContent;
+                profileImagePreview.src = profileImage.src;
+                
+                // Initialize skills in edit modal
+                initializeEditSkills();
+                
+                editModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close edit modal
+            cancelEditBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Save profile changes
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Update profile with form data
+                profileName.textContent = editNameInput.value;
+                profileTitle.textContent = editTitleInput.value;
+                profileEmail.textContent = editEmailInput.value;
+                profilePhone.textContent = editPhoneInput.value;
+                profileAddress.textContent = editAddressInput.value;
+                profileBio.textContent = editBioInput.value;
+                profileImage.src = profileImagePreview.src;
+                
+                // Update skills
+                skillsContainer.innerHTML = '';
+                const skills = editSkillsContainer.querySelectorAll('div');
+                skills.forEach(skill => {
+                    const skillText = skill.textContent.trim();
+                    const skillElement = document.createElement('span');
+                    skillElement.className = 'bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full';
+                    skillElement.textContent = skillText;
+                    skillsContainer.appendChild(skillElement);
+                });
+                
+                // Close modal
+                editModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                
+                // Show success toast
+                showToast('Profile updated successfully!', 'success');
+            });
+            
+            // Change profile image (main button)
+            changeImageBtn.addEventListener('click', function() {
+                const newImageUrl = prompt('Enter new image URL:', profileImage.src);
+                if (newImageUrl) {
+                    profileImage.src = newImageUrl;
+                    showToast('Profile image updated!', 'success');
+                }
+            });
+            
+            // Change profile image (modal button)
+            changeImageModalBtn.addEventListener('click', function() {
+                const newImageUrl = prompt('Enter new image URL:', profileImagePreview.src);
+                if (newImageUrl) {
+                    profileImagePreview.src = newImageUrl;
+                }
+            });
+            
+            // Add skill (main button)
+            addSkillBtn.addEventListener('click', function() {
+                const newSkill = prompt('Enter a new skill:');
+                if (newSkill) {
+                    const skillElement = document.createElement('span');
+                    skillElement.className = 'bg-blue-100 text-primary text-xs font-medium px-2.5 py-1 rounded-full';
+                    skillElement.textContent = newSkill;
+                    skillsContainer.appendChild(skillElement);
+                    showToast('Skill added!', 'success');
+                }
+            });
+            
+            // Add skill (modal button)
+            addSkillModalBtn.addEventListener('click', function() {
+                const newSkill = newSkillInput.value.trim();
+                if (newSkill) {
+                    const skillElement = document.createElement('div');
+                    skillElement.className = 'flex items-center bg-blue-100 text-primary text-xs font-medium px-3 py-1 rounded-full';
+                    skillElement.innerHTML = `
+                        ${newSkill}
+                        <button type="button" class="ml-2 text-gray-400 hover:text-red-500 remove-skill">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    `;
+                    editSkillsContainer.appendChild(skillElement);
+                    newSkillInput.value = '';
+                    
+                    // Add event listener to remove button
+                    skillElement.querySelector('.remove-skill').addEventListener('click', function() {
+                        skillElement.remove();
+                    });
+                }
+            });
+            
+            // Close modal when clicking outside
+            editModal.addEventListener('click', function(e) {
+                if (e.target === editModal) {
+                    editModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Toast notification function
+            function showToast(message, type) {
+                const toast = document.createElement('div');
+                toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg text-white font-medium flex items-center ${
+                    type === 'success' ? 'bg-green-500' : 'bg-red-500'
+                }`;
+                toast.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} mr-2"></i>
+                    ${message}
+                `;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

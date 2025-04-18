@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Hub | PDF & Notes Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .file-upload-input {
+            display: none;
+        }
+        .file-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Document Hub</h1>
+            <p class="text-gray-600">Manage your PDFs and notes in one place</p>
+        </header>
+
+        <!-- Upload Section -->
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Upload Documents</h2>
+                <button id="uploadBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200 flex items-center">
+                    <i class="fas fa-upload mr-2"></i> Upload
+                </button>
+                <input type="file" id="fileInput" class="file-upload-input" accept=".pdf,.txt,.doc,.docx" multiple>
+            </div>
+
+            <div id="uploadArea" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition duration-200">
+                <i class="fas fa-cloud-upload-alt text-4xl text-blue-500 mb-3"></i>
+                <h3 class="text-lg font-medium text-gray-700 mb-1">Drag & Drop files here</h3>
+                <p class="text-gray-500 text-sm">or click to browse (PDF, DOC, TXT)</p>
+                <p class="text-gray-400 text-xs mt-2">Max file size: 10MB</p>
+            </div>
+
+            <div id="uploadProgress" class="mt-4 hidden">
+                <div class="flex justify-between mb-1">
+                    <span class="text-sm font-medium text-gray-700">Uploading...</span>
+                    <span id="progressPercent" class="text-sm text-gray-500">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progressBar" class="progress-bar bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents List -->
+        <section>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">Your Documents</h2>
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search documents..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Sample Document Cards -->
+                <div class="file-card bg-white rounded-lg shadow-sm p-4 border border-gray-100 transition duration-200">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-file-pdf text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-1">Project_Report.pdf</h3>
+                            <p class="text-gray-500 text-sm">2.4 MB • PDF</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-100 pt-3">
+                        <span class="text-xs text-gray-500">Uploaded: 2 days ago</span>
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download</button>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">Share</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-card bg-white rounded-lg shadow-sm p-4 border border-gray-100 transition duration-200">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-green-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-1">Meeting_Notes.txt</h3>
+                            <p class="text-gray-500 text-sm">156 KB • Text</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-100 pt-3">
+                        <span class="text-xs text-gray-500">Uploaded: 1 week ago</span>
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download</button>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">Share</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-card bg-white rounded-lg shadow-sm p-4 border border-gray-100 transition duration-200">
+                    <div class="flex items-start mb-3">
+                        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+                            <i class="fas fa-file-word text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-1">Research_Paper.docx</h3>
+                            <p class="text-gray-500 text-sm">5.7 MB • Word</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-100 pt-3">
+                        <span class="text-xs text-gray-500">Uploaded: 3 weeks ago</span>
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">Download</button>
+                            <button class="text-gray-500 hover:text-gray-700 text-sm">Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="noDocuments" class="hidden text-center py-12">
+                <i class="fas fa-folder-open text-4xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-medium text-gray-500 mb-2">No documents found</h3>
+                <p class="text-gray-400">Upload your first document to get started</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const uploadBtn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const uploadProgress = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            const searchInput = document.getElementById('searchInput');
+            const noDocuments = document.getElementById('noDocuments');
+
+            // Event Listeners
+            uploadBtn.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            fileInput.addEventListener('change', handleFileUpload);
+            
+            // Drag and drop functionality
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('border-blue-400', 'bg-blue-50');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('border-blue-400', 'bg-blue-50');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('border-blue-400', 'bg-blue-50');
+                fileInput.files = e.dataTransfer.files;
+                handleFileUpload();
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const fileCards = document.querySelectorAll('.file-card');
+                let visibleCount = 0;
+                
+                fileCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                noDocuments.style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+
+            // File upload handler
+            function handleFileUpload() {
+                const files = fileInput.files;
+                if (files.length === 0) return;
+                
+                uploadProgress.classList.remove('hidden');
+                
+                // Simulate upload progress (in a real app, you'd use AJAX/Fetch)
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 10;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        
+                        // Show success message
+                        setTimeout(() => {
+                            uploadProgress.classList.add('hidden');
+                            progressBar.style.width = '0%';
+                            progressPercent.textContent = '0%';
+                            
+                            // In a real app, you would add the new file to the list
+                            alert(`${files.length} file(s) uploaded successfully!`);
+                        }, 500);
+                    }
+                    
+                    progressBar.style.width = `${progress}%`;
+                    progressPercent.textContent = `${Math.round(progress)}%`;
+                }, 300);
+            }
+            
+            // Download button handlers (sample functionality)
+            document.querySelectorAll('.file-card button:first-child').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const fileName = this.closest('.file-card').querySelector('h3').textContent;
+                    alert(`In a real app, this would download: ${fileName}`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
